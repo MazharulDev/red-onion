@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import logo from '../../images/logo2.png'
 import {FcGoogle} from 'react-icons/fc'
 import {AiFillGithub} from 'react-icons/ai'
 const Login = () => {
+    const [signInWithGoogle,userWithGoogle] = useSignInWithGoogle(auth);
     const navigate = useNavigate();
     const [
         signInWithEmailAndPassword,
@@ -31,8 +32,11 @@ const Login = () => {
     }
     const location = useLocation();
     let from = location.state?.from?.pathname || '/';
-    if (user) {
+    if (user||userWithGoogle) {
         navigate(from, { replace: true });
+    }
+    const handleGoogleSignIn=()=>{
+        signInWithGoogle();
     }
     return (
         <div className='flex justify-center bg-img h-screen'>
@@ -48,7 +52,7 @@ const Login = () => {
                     <Link to='/signup'><p className='text-center text-red-600'>Create an account</p></Link>
                 </form>
                 <div className='mx-auto mt-5 w-2/5'>
-                    <button className='bg-white border-black border p-3 rounded-full w-full mb-4 cursor-pointer flex items-center justify-center'><FcGoogle className='mr-3'/>Sign in with google</button>
+                    <button onClick={handleGoogleSignIn} className='bg-white border-black border p-3 rounded-full w-full mb-4 cursor-pointer flex items-center justify-center'><FcGoogle className='mr-3'/>Sign in with google</button>
                     <button className='bg-black text-white p-3 rounded-full w-full mb-4 cursor-pointer flex items-center justify-center'><AiFillGithub className='mr-3'/> Sign in with github</button>
                 </div>
             </div>
