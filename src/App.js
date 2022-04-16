@@ -14,8 +14,9 @@ function App() {
       <Header></Header>
       <Routes>
         <Route path='/' element={<Home></Home>}>
+          <Route index element={<BreakFast></BreakFast>}></Route>
           <Route path='/breakfast' element={<BreakFast></BreakFast>}></Route>
-          <Route path='/lunch/' element={<Lunch></Lunch>}></Route>
+          <Route path='/lunch' element={<Lunch></Lunch>}></Route>
           <Route path='/dinner' element={<Dinner></Dinner>}></Route>
         </Route>
         <Route path='/login' element={<Login></Login>}></Route>

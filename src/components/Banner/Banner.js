@@ -2,8 +2,8 @@ import React from 'react';
 import './Banner.css'
 const Banner = () => {
     return (
-        <div className='banner'>
-            <div className='text-center child'>
+        <div className='banner h-screen'>
+            <div className='text-center pt-36'>
                 <h2 className='text-5xl text-center'>Best food withing for your belly</h2>
                 <div className='mt-8 w-full'>
                     <input className='px-4 py-3 text-sm rounded-full w-1/4 border-hidden' type="text" name="" id="" placeholder='Search food items' />
