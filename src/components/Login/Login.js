@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import logo from '../../images/logo2.png'
@@ -7,6 +7,7 @@ import {FcGoogle} from 'react-icons/fc'
 import {AiFillGithub} from 'react-icons/ai'
 const Login = () => {
     const [signInWithGoogle,userWithGoogle] = useSignInWithGoogle(auth);
+    const [signInWithGithub, userWithGitHub,loadingWithGitHub,errorWithGitHub] = useSignInWithGithub(auth);
     const navigate = useNavigate();
     const [
         signInWithEmailAndPassword,
@@ -27,16 +28,19 @@ const Login = () => {
         signInWithEmailAndPassword(email, password)
     }
     let errorElement;
-    if (errorHooks) {
+    if (errorHooks||errorWithGitHub) {
         errorElement = <p className='text-red-600'>{errorHooks?.message}</p>
     }
     const location = useLocation();
     let from = location.state?.from?.pathname || '/';
-    if (user||userWithGoogle) {
+    if (user||userWithGoogle||userWithGitHub) {
         navigate(from, { replace: true });
     }
     const handleGoogleSignIn=()=>{
         signInWithGoogle();
+    }
+    const handleGitHubSignIn=()=>{
+        signInWithGithub()
     }
     return (
         <div className='flex justify-center bg-img h-screen'>
@@ -53,7 +57,7 @@ const Login = () => {
                 </form>
                 <div className='mx-auto mt-5 w-2/5'>
                     <button onClick={handleGoogleSignIn} className='bg-white border-black border p-3 rounded-full w-full mb-4 cursor-pointer flex items-center justify-center'><FcGoogle className='mr-3'/>Sign in with google</button>
-                    <button className='bg-black text-white p-3 rounded-full w-full mb-4 cursor-pointer flex items-center justify-center'><AiFillGithub className='mr-3'/> Sign in with github</button>
+                    <button onClick={handleGitHubSignIn} className='bg-black text-white p-3 rounded-full w-full mb-4 cursor-pointer flex items-center justify-center'><AiFillGithub className='mr-3'/> Sign in with github</button>
                 </div>
             </div>
         </div>
