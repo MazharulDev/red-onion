@@ -7,6 +7,7 @@ import Header from './components/Header/Header';
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import Lunch from './components/Lunch/Lunch';
+import RequireAuth from './components/RequireAuth/RequireAuth';
 import SignUp from './components/SignUp/SignUp';
 
 function App() {
@@ -22,7 +23,11 @@ function App() {
         </Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/signup' element={<SignUp></SignUp>}></Route>
-        <Route path='/cart' element={<Cart></Cart>}></Route>
+        <Route path='/cart' element={
+         <RequireAuth>
+           <Cart></Cart>
+         </RequireAuth>
+        }></Route>
       </Routes>
     </div>
   );

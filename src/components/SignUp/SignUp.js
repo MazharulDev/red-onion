@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import logo from '../../images/logo2.png'
 import './SignUp.css'
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 
 const SignUp = () => {
-    const navigate=useNavigate();
+    
     const [
         createUserWithEmailAndPassword,
         user,
@@ -38,9 +38,7 @@ const SignUp = () => {
         }
         createUserWithEmailAndPassword(email,password)
     }
-    if(user){
-        navigate('/')
-    }
+ 
     return (
         <div className='flex justify-center bg-img h-screen'>
             <div>
@@ -53,7 +51,8 @@ const SignUp = () => {
                     <input onChange={handlePasswordChange} className='bg-gray-200 p-3 rounded w-full mb-4' type="password" name=""  placeholder='Password' />
                     <input onChange={handleConfirmPasswordChange} className='bg-gray-200 p-3 rounded w-full mb-4' type="password" name=""  placeholder='Confirm Password' />
                     <p className='text-red-600'>{error}</p>
-                    <input className='bg-red-600 text-white p-3 rounded w-full mb-4 cursor-pointer' type="submit" value="Sign in" />
+                    <p className='text-red-600'>{errorHooks}</p>
+                    <input className='bg-red-600 text-white p-3 rounded w-full mb-4 cursor-pointer' type="submit" value="Sign up" />
                     <Link to='/login'><p className='text-center text-red-600'>Already have an account</p></Link>
                 </form>
                 
