@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import BreakFast from './components/BreakFast/BreakFast';
+import Cart from './components/Cart/Cart';
 import Dinner from './components/Dinner/Dinner';
 import Header from './components/Header/Header';
 import Home from './components/Home/Home';
@@ -21,6 +22,7 @@ function App() {
         </Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/signup' element={<SignUp></SignUp>}></Route>
+        <Route path='/cart' element={<Cart></Cart>}></Route>
       </Routes>
     </div>
   );
