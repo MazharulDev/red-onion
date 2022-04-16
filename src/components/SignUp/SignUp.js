@@ -4,6 +4,8 @@ import logo from '../../images/logo2.png'
 import './SignUp.css'
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
+import {FcGoogle} from 'react-icons/fc'
+import {AiFillGithub} from 'react-icons/ai'
 
 const SignUp = () => {
     
@@ -55,7 +57,10 @@ const SignUp = () => {
                     <input className='bg-red-600 text-white p-3 rounded w-full mb-4 cursor-pointer' type="submit" value="Sign up" />
                     <Link to='/login'><p className='text-center text-red-600'>Already have an account</p></Link>
                 </form>
-                
+                <div className='mx-auto mt-5 w-2/5'>
+                    <button className='bg-white border-black border p-3 rounded-full w-full mb-4 cursor-pointer flex items-center justify-center'><FcGoogle className='mr-3'/>Sign in with google</button>
+                    <button className='bg-black text-white p-3 rounded-full w-full mb-4 cursor-pointer flex items-center justify-center'><AiFillGithub className='mr-3'/> Sign in with github</button>
+                </div>
             </div>
         </div>
     );
